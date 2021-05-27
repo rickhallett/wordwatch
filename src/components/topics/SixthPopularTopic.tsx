@@ -1,6 +1,6 @@
 import React from "react";
 
-import { mapSentimentColour } from "../util/mapSentimentColour";
+import { mapSentimentColour } from "../../util/mapSentimentColour";
 
 export const SixthPopularTopic = ({
   sentiment,
