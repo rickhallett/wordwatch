@@ -3,6 +3,12 @@ import "./index.css";
 import "./App.css";
 import logo from "./logo.svg";
 import topics from "./topics.json";
+import { FirstPopularTopic } from './components/FirstPopularTopic';
+import {SecondPopularTopic} from './components/SecondPopularTopic';
+import { FifthPopularTopic } from './components/FifthPopularTopic';
+import { ForthPopularTopic } from './components/ForthPopularTopic';
+import { SixthPopularTopic } from './components/SixthPopularTopic';
+import { ThirdPopularTopic } from './components/ThirdPopularTopic';
 
 function App() {
   console.log(topics);
@@ -14,24 +20,12 @@ function App() {
       </header>
       <main className="flex flex-col md:flex-row">
         <section className="bg-gray-200 ml-6 mr-6 p-6 flex-grow md:w-2/3 h-96">
-          <div className="text-6xl text-green-400 max-w-max inline p-2">
-            <h1 className="inline">Most popular</h1>
-          </div>
-          <div className="text-5xl text-red-400 max-w-max inline p-2">
-            <h2 className="inline">Second most popular</h2>
-          </div>
-          <div className="text-4xl text-gray-400 max-w-max inline p-2">
-            <h3 className="inline">Third most popular</h3>
-          </div>
-          <div className="text-3xl text-green-400 max-w-max inline p-2">
-            <h4 className="inline">Forth most popular</h4>
-          </div>
-          <div className="text-2xl text-red-400 max-w-max inline p-2">
-            <h5 className="inline">Fifth most popular</h5>
-          </div>
-          <div className="text-1xl text-gray-400 max-w-max inline p-2">
-            <h6 className="inline">Sixth most popular</h6>
-          </div>
+          <FirstPopularTopic sentiment={"positive"} />
+          <SecondPopularTopic sentiment={"negative"} />
+          <ThirdPopularTopic sentiment={"neutral"} />
+          <ForthPopularTopic sentiment={"positive"} />
+          <FifthPopularTopic sentiment={"negative"} />
+          <SixthPopularTopic sentiment={"neutral"} />
         </section>
         <section className="bg-gray-300 ml-6 md:ml-0 mr-6 mt-6 md:mt-0 p-6 w-auto md:w-1/3 h-96">
           <div className="text-left text-gray-500 px-5 md:px-2 max-w-xs mx-auto md:max-w-full">
