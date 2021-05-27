@@ -1,10 +1,5 @@
-export const mapSentimentColour = (sentiment: string): string => {
-  const sentimentToColourMap: any = {
-    positive: 'green',
-    neutral: 'gray',
-    negative: 'red'
-  };
-
-  return sentimentToColourMap[sentiment];
-}
-
+export const mapSentimentColour = (sentiment: number): string => {
+  if (sentiment > 50) return "green";
+  if (sentiment > 25) return "gray";
+  return "red";
+};

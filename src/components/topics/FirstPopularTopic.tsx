@@ -1,6 +1,6 @@
 import { mapSentimentColour } from '../../util/mapSentimentColour';
 
-export const FirstPopularTopic = ({sentiment}: {sentiment:string}): JSX.Element => {
+export const FirstPopularTopic = ({sentiment}: {sentiment:number}): JSX.Element => {
   const sentimentColour = mapSentimentColour(sentiment);
   return (
     <div
