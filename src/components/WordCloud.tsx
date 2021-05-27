@@ -1,4 +1,3 @@
-import React from 'react';
 import { FifthPopularTopic } from './topics/FifthPopularTopic';
 import { FirstPopularTopic } from './topics/FirstPopularTopic';
 import { ForthPopularTopic } from './topics/ForthPopularTopic';

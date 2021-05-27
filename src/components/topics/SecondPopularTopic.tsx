@@ -1,5 +1,3 @@
-import React from "react";
-
 import { mapSentimentColour } from "../../util/mapSentimentColour";
 
 export const SecondPopularTopic = ({

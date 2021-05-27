@@ -1,5 +1,3 @@
-import React from "react";
-
 export const MetaCloud = (): JSX.Element => {
   return (
     <section className="bg-gray-300 ml-6 md:ml-0 mr-6 mt-6 md:mt-0 p-6 w-auto md:w-1/3 h-96">
