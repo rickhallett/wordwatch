@@ -14,23 +14,23 @@ function App() {
       </header>
       <main className="flex flex-col md:flex-row">
         <section className="bg-gray-200 ml-6 mr-6 p-6 flex-grow md:w-2/3 h-96">
-          <div className="text-6xl text-green-400">
-            <h1>Most popular</h1>
+          <div className="text-6xl text-green-400 max-w-max inline p-2">
+            <h1 className="inline">Most popular</h1>
           </div>
-          <div className="text-5xl text-red-400">
-            <h2>Second most popular</h2>
+          <div className="text-5xl text-red-400 max-w-max inline p-2">
+            <h2 className="inline">Second most popular</h2>
           </div>
-          <div className="text-4xl text-gray-400">
-            <h3>Third most popular</h3>
+          <div className="text-4xl text-gray-400 max-w-max inline p-2">
+            <h3 className="inline">Third most popular</h3>
           </div>
-          <div className="text-3xl text-green-400">
-            <h4>Forth most popular</h4>
+          <div className="text-3xl text-green-400 max-w-max inline p-2">
+            <h4 className="inline">Forth most popular</h4>
           </div>
-          <div className="text-2xl text-red-400">
-            <h5>Fifth most popular</h5>
+          <div className="text-2xl text-red-400 max-w-max inline p-2">
+            <h5 className="inline">Fifth most popular</h5>
           </div>
-          <div className="text-1xl text-gray-400">
-            <h6>Sixth most popular</h6>
+          <div className="text-1xl text-gray-400 max-w-max inline p-2">
+            <h6 className="inline">Sixth most popular</h6>
           </div>
         </section>
         <section className="bg-gray-300 ml-6 md:ml-0 mr-6 mt-6 md:mt-0 p-6 w-auto md:w-1/3 h-96">
