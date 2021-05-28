@@ -11,7 +11,8 @@ export const SixthPopularTopic = ({
   const sentimentColour = mapSentimentColour(topic.sentimentScore);
 
   const onWordSelectEvent = (event: any) => {
-    onWordSelect(event);
+    console.log("SixthPopularTopic.tsx", event.target.innerText);
+    onWordSelect(event, topic.id);
   };
 
   return (

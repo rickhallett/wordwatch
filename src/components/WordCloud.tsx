@@ -6,7 +6,6 @@ import { SixthPopularTopic } from "./topics/SixthPopularTopic";
 import { ThirdPopularTopic } from "./topics/ThirdPopularTopic";
 
 import { Topic } from "../types";
-import { TopicElement } from "./topics/TopicElement";
 
 export const WordCloud = ({
   topics,
@@ -16,18 +15,71 @@ export const WordCloud = ({
   onWordSelect: any;
 }): JSX.Element => {
   console.log("topics", topics);
+
+  //TODO: sort only on app init
   topics.sort(() => Math.random() - 0.5);
 
-  const onWordSelectEvent = (event: any) => {
-    console.log("wordcloud", event.target.value);
-    onWordSelect(event);
+  const onWordSelectEvent = (event: any, id: string) => {
+    console.log("WordCloud.tsx", event.target.innerText);
+    onWordSelect(event, id);
   };
 
   return (
     <section className="bg-gray-200 ml-6 mr-6 mb-6 p-6 md:w-2/3 h-xl">
-      {topics.map((topic: Topic, index: number) => (
-        <TopicElement topic={topic} onWordSelect={onWordSelectEvent} />
-      ))}
+      {topics.map((topic: Topic, index: number) => {
+        if (topic.volume >= 50) {
+          return (
+            <FirstPopularTopic
+              key={topic.id}
+              topic={topic}
+              onWordSelect={onWordSelectEvent}
+            />
+          );
+        }
+        if (topic.volume >= 40) {
+          return (
+            <SecondPopularTopic
+              key={topic.id}
+              topic={topic}
+              onWordSelect={onWordSelectEvent}
+            />
+          );
+        }
+        if (topic.volume >= 30) {
+          return (
+            <ThirdPopularTopic
+              key={topic.id}
+              topic={topic}
+              onWordSelect={onWordSelectEvent}
+            />
+          );
+        }
+        if (topic.volume >= 20) {
+          return (
+            <ForthPopularTopic
+              key={topic.id}
+              topic={topic}
+              onWordSelect={onWordSelectEvent}
+            />
+          );
+        }
+        if (topic.volume >= 10) {
+          return (
+            <FifthPopularTopic
+              key={topic.id}
+              topic={topic}
+              onWordSelect={onWordSelectEvent}
+            />
+          );
+        }
+        return (
+          <SixthPopularTopic
+            key={topic.id}
+            topic={topic}
+            onWordSelect={onWordSelectEvent}
+          />
+        );
+      })}
     </section>
   );
 };

@@ -11,7 +11,8 @@ export const ForthPopularTopic = ({
   const sentimentColour = mapSentimentColour(topic.sentimentScore);
 
   const onWordSelectEvent = (event: any) => {
-    onWordSelect(event);
+    console.log("ForthPopularTopic.tsx", event.target.innerText);
+    onWordSelect(event, topic.id);
   };
 
   return (
