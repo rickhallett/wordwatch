@@ -1,4 +1,4 @@
-import { Topic } from '../../types';
+import { Topic } from "../../types";
 import { mapSentimentColour } from "../../util/mapSentimentColour";
 
 export const SixthPopularTopic = ({

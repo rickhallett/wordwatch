@@ -7,4 +7,4 @@ export const Header = (): JSX.Element => {
       <h1 className="text-gray-100 text-3xl">WordWatch</h1>
     </header>
   );
-}
+};

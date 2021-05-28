@@ -1,4 +1,4 @@
-import { Topic } from '../../types';
+import { Topic } from "../../types";
 import { mapSentimentColour } from "../../util/mapSentimentColour";
 
 export const SecondPopularTopic = ({
@@ -18,7 +18,9 @@ export const SecondPopularTopic = ({
     <div
       className={`text-5xl text-${sentimentColour}-400 max-w-max inline p-2`}
     >
-      <h2 className="inline" onClick={onWordSelectEvent}>{topic.label}</h2>
+      <h2 className="inline" onClick={onWordSelectEvent}>
+        {topic.label}
+      </h2>
     </div>
   );
 };
