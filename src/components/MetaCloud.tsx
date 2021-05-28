@@ -11,7 +11,7 @@ export const MetaCloud = ({
         <thead>
           <tr>
             <th className="bg-gray-300 border text-lefr px-6 py-4">
-              {activeTopic.label}
+              {activeTopic.label || null}
             </th>
             <th className="bg-gray-300 border text-lefr px-6 py-4"></th>
           </tr>
@@ -40,7 +40,7 @@ export const MetaCloud = ({
               Total mentions:
             </td>
             <td className="bg-gray-100 border px-6 py-4 font-bold">
-              {activeTopic.volume}
+              {activeTopic.volume || null}
             </td>
           </tr>
         </tbody>

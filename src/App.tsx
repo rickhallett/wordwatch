@@ -13,6 +13,7 @@ import { Header } from "./components/Header";
 const App = (): JSX.Element => {
   const data: WordCloudData = rawData;
 
+
   const selectRandomTopic = (): Topic => {
     const topic = data.topics.find(
       (t, i) => i === Math.round(Math.random() * (data.topics.length - 1))
@@ -36,7 +37,7 @@ const App = (): JSX.Element => {
     <div className="text-center">
       <Header />
       <main className="flex flex-col md:flex-row">
-        <WordCloud topics={data.topics} onWordSelect={handleWordClick} />
+        <WordCloud topics={[]} onWordSelect={handleWordClick} />
         <MetaCloud activeTopic={activeTopic} />
       </main>
     </div>
