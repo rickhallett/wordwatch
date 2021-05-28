@@ -43,3 +43,9 @@ export interface Sentiment {
   neutral?: number;
   positive?: number;
 }
+
+export interface HeadingTags {
+  openingTag: string;
+  closeOpeningTag: string;
+  closingTag: string;
+}
