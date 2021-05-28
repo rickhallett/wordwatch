@@ -3,8 +3,7 @@ import React, { useState, useEffect } from "react";
 import "./index.css";
 import "./App.css";
 
-import rawData from "./topics.json";
-import { WordCloudData, Topic } from "./types";
+import { Topic } from "./types";
 
 import { WordCloud } from "./components/WordCloud";
 import { MetaCloud } from "./components/MetaCloud";
@@ -12,7 +11,6 @@ import { Header } from "./components/Header";
 import { ApiInterface } from "./util/getTopicData";
 
 const App = (): JSX.Element => {
-  // const data: WordCloudData = rawData;
   const [topicData, setTopicData] = useState<Topic[]>([] as Topic[]);
   const [activeTopic, setActiveTopic] = useState<Topic>({} as Topic);
 
@@ -24,7 +22,7 @@ const App = (): JSX.Element => {
     };
 
     asyncFetch();
-  }, [topicData]);
+  }, []);
 
   const selectRandomTopic = (): Topic => {
     const topic = topicData.find(
