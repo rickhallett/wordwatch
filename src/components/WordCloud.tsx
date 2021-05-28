@@ -11,7 +11,7 @@ export const WordCloud = ({ topics }: WordCloudData): JSX.Element => {
   console.log("topics", topics);
   topics.sort(() => Math.random() - 0.5);
   return (
-    <section className="bg-gray-200 ml-6 mr-6 p-6 flex-grow md:w-2/3 h-96">
+    <section className="bg-gray-200 ml-6 mr-6 mb-6 p-6 md:w-2/3 h-xl">
       {topics.map((topic: Topic, index: number) => {
         if (topic.volume >= 50) {
           return <FirstPopularTopic key={topic.id} topic={topic} />;
