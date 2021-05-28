@@ -20,7 +20,6 @@ export const WordCloud = ({
   topics.sort(() => Math.random() - 0.5);
 
   const onWordSelectEvent = (event: any, id: string) => {
-    console.log("WordCloud.tsx", event.target.innerText);
     onWordSelect(event, id);
   };
 

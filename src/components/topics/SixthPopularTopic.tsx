@@ -11,7 +11,6 @@ export const SixthPopularTopic = ({
   const sentimentColour = mapSentimentColour(topic.sentimentScore);
 
   const onWordSelectEvent = (event: any) => {
-    console.log("SixthPopularTopic.tsx", event.target.innerText);
     onWordSelect(event, topic.id);
   };
 
@@ -20,7 +19,7 @@ export const SixthPopularTopic = ({
       className={`text-1xl text-${sentimentColour}-400 max-w-max inline p-2`}
     >
       <h6 className="inline" onClick={onWordSelectEvent}>
-        {topic.label}r
+        {topic.label}
       </h6>
     </div>
   );

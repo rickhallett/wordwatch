@@ -11,7 +11,6 @@ export const ForthPopularTopic = ({
   const sentimentColour = mapSentimentColour(topic.sentimentScore);
 
   const onWordSelectEvent = (event: any) => {
-    console.log("ForthPopularTopic.tsx", event.target.innerText);
     onWordSelect(event, topic.id);
   };
 
@@ -20,7 +19,7 @@ export const ForthPopularTopic = ({
       className={`text-3xl text-${sentimentColour}-400 max-w-max inline p-2`}
     >
       <h4 className="inline" onClick={onWordSelectEvent}>
-        {topic.label}r
+        {topic.label}
       </h4>
     </div>
   );

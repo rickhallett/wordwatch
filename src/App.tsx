@@ -24,11 +24,11 @@ const App = (): JSX.Element => {
 
   // TODO: what is the React ts type for a mouse click event? React.MouseEvent does not define event.target.innerText)
   const handleWordClick = (event: any, id: string) => {
-    if (event.target.innerText) {
+    try {
       const newActiveTopic = data.topics.find((t) => t.id === id) as Topic;
-      setActiveTopic(newActiveTopic);
-    } else {
-      console.error("event.target.innerText is undefined");
+      if (newActiveTopic) setActiveTopic(newActiveTopic);
+    } catch (error) {
+      console.error(error);
     }
   };
 
