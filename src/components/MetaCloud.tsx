@@ -5,6 +5,13 @@ export const MetaCloud = ({
 }: {
   activeTopic: Topic;
 }): JSX.Element => {
+  if (!activeTopic || !activeTopic.sentiment) {
+    return (
+         <section className="bg-gray-100 ml-6 max-w-10/12 md:ml-0 mr-6 mt-6 md:mt-0 p-6 w-auto md:w-1/3 h-xl">
+           <h2>No topic selected!</h2>
+         </section>
+    )
+  }
   return (
     <section className="bg-gray-100 ml-6 max-w-10/12 md:ml-0 mr-6 mt-6 md:mt-0 p-6 w-auto md:w-1/3 h-xl">
       <table className="shadow-lg bg-white mx-auto">
