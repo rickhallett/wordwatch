@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import { useState, useEffect } from "react";
 
 import "./index.css";
 import "./App.css";
@@ -10,27 +10,33 @@ import { MetaCloud } from "./components/MetaCloud";
 import { Header } from "./components/Header";
 import { ApiInterface } from "./util/getTopicData";
 
-const App = (): JSX.Element => {
+const selectRandomTopic = (topicData: Topic[]): Topic => {
+  const topic = topicData.find(
+    (t, i) => i === Math.round(Math.random() * (topicData.length - 1))
+  );
+  console.log(topic, topicData[0]);
+  return topic ? topic : topicData[0];
+};
+
+const useApi = () => {
   const [topicData, setTopicData] = useState<Topic[]>([] as Topic[]);
   const [activeTopic, setActiveTopic] = useState<Topic>({} as Topic);
 
   useEffect(() => {
     const asyncFetch = async () => {
-      const data = await ApiInterface.getTopicData().topics;
-      setTopicData(data);
-      setActiveTopic(selectRandomTopic());
+      const data = await ApiInterface.getTopicData();
+      setTopicData(data.topics);
+      setActiveTopic(selectRandomTopic(data.topics));
     };
 
     asyncFetch();
   }, []);
 
-  const selectRandomTopic = (): Topic => {
-    const topic = topicData.find(
-      (t, i) => i === Math.round(Math.random() * (topicData.length - 1))
-    );
-    console.log(topic, topicData[0]);
-    return topic ? topic : topicData[0];
-  };
+  return { topicData, setTopicData, activeTopic, setActiveTopic };
+};
+
+const App = (): JSX.Element => {
+  const { topicData, activeTopic, setActiveTopic } = useApi();
 
   // TODO: what is the React ts type for a mouse click event? React.MouseEvent does not define event.target.innerText)
   const handleWordClick = (event: any, id: string) => {
