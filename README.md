@@ -124,7 +124,7 @@ Challenge:
 
 Solution:
 
-- Stick to component tests, rather than directly targeting the App parent component.
+- Stick to component tests, rather than directly targeting the App parent component. Its probably worth noting I have almost no experience with unit testing browser output.
 
 Challenge:
 

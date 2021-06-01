@@ -1,9 +1,15 @@
-import { render, screen } from "@testing-library/react";
+import { render, RenderResult, screen } from "@testing-library/react";
+import { act } from "react-dom/test-utils";
 import App from "./App";
 import { Header } from "./components/Header";
-import { act } from "react-dom/test-utils";
+import { Topic} from './types';
+import { WordCloud } from "./components/WordCloud";
+import { ApiInterface } from './util/getTopicData';
+
+const noop = () => {};
 
 describe("App", () => {
+
   xit("Does not throw on multiple page loads (stress test the data)", () => {});
 
   describe("Header", () => {
@@ -32,19 +38,35 @@ describe("App", () => {
 
      */
 
+    // TODO: look into snapshot testing to test layout
+
     xit("Collapses to flex-column after medium breakpoints are surpassed", () => {
       // act(() => {
-        // render(App());
+      // render(App());
       // });
     });
   });
 
   describe("WordCloud", () => {
-    xit("If there are no topics, the render does not throw", () => {});
 
-    xit("If there are no topics, the user is meaningfully notified", () => {});
+    it("If there are no topics, the user is meaningfully notified", () => {
+       
+       const wordCloud = render(<WordCloud topics={[]} onWordSelect={noop} />);
 
-    xit("Renders the correct number of topics", () => {});
+       const userNotificationPresent = Boolean(screen.getByText("No topics!"));
+       expect(userNotificationPresent).toEqual(true);
+    });
+
+    it("Renders the correct number of topics", async () => {
+      const data = await ApiInterface.getTopicData();
+      const expectedLength = data.topics.length;
+
+      const wordCloud = render(<WordCloud topics={data.topics} onWordSelect={noop} />);
+      const topicsRendered = wordCloud.getAllByRole('heading');
+
+      expect(topicsRendered.length).toEqual(expectedLength);
+
+    });
 
     xit("Renders topics in a shuffed order on each topic click", () => {});
 

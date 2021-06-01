@@ -25,7 +25,7 @@ const App = (): JSX.Element => {
     };
 
     asyncFetch();
-  }, [topicData]);
+  }, []);
 
   // TODO: what is the React ts type for a mouse click event? React.MouseEvent does not define event.target.innerText)
   const handleWordClick = (event: any, id: string) => {
