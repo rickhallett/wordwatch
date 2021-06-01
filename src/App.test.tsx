@@ -1,15 +1,21 @@
-import { render, RenderResult, screen } from "@testing-library/react";
+import {
+  fireEvent,
+  render,
+  RenderResult,
+  screen,
+  waitFor,
+  waitForElementToBeRemoved,
+} from "@testing-library/react";
 import { act } from "react-dom/test-utils";
 import App from "./App";
 import { Header } from "./components/Header";
-import { Topic} from './types';
+import { Topic } from "./types";
 import { WordCloud } from "./components/WordCloud";
-import { ApiInterface } from './util/getTopicData';
+import { ApiInterface } from "./util/getTopicData";
 
 const noop = () => {};
 
 describe("App", () => {
-
   xit("Does not throw on multiple page loads (stress test the data)", () => {});
 
   describe("Header", () => {
@@ -48,27 +54,49 @@ describe("App", () => {
   });
 
   describe("WordCloud", () => {
-
     it("If there are no topics, the user is meaningfully notified", () => {
-       
-       const wordCloud = render(<WordCloud topics={[]} onWordSelect={noop} />);
+      const wordCloud = render(<WordCloud topics={[]} onWordSelect={noop} />);
 
-       const userNotificationPresent = Boolean(screen.getByText("No topics!"));
-       expect(userNotificationPresent).toEqual(true);
+      const userNotificationPresent = Boolean(screen.getByText("No topics!"));
+      expect(userNotificationPresent).toEqual(true);
     });
 
     it("Renders the correct number of topics", async () => {
       const data = await ApiInterface.getTopicData();
       const expectedLength = data.topics.length;
 
-      const wordCloud = render(<WordCloud topics={data.topics} onWordSelect={noop} />);
-      const topicsRendered = wordCloud.getAllByRole('heading');
+      const wordCloud = render(
+        <WordCloud topics={data.topics} onWordSelect={noop} />
+      );
+      const topicsRendered = wordCloud.getAllByRole("heading");
 
       expect(topicsRendered.length).toEqual(expectedLength);
-
     });
 
-    xit("Renders topics in a shuffed order on each topic click", () => {});
+    // BUG: despite click event, matcher returns equality. There is some issue here with the asynchonous stack
+    xit("Renders topics in a shuffed order on each topic click", async () => {
+      const data = await ApiInterface.getTopicData();
+      const wordCloud = render(
+        <WordCloud topics={data.topics} onWordSelect={noop} />
+      );
+
+      const firstTopicRendered = wordCloud.getAllByRole("heading")[0];
+      console.log("firstTopicRendered", firstTopicRendered);
+
+      const clicked = await fireEvent.click(firstTopicRendered);
+      console.log("clicked", clicked);
+
+      await waitFor(() => {
+        expect(firstTopicRendered.innerHTML).not.toEqual(
+          wordCloud.getAllByRole("heading")[0]
+        );
+      });
+
+      const secondTopicsRendered = await wordCloud.findAllByRole("heading");
+      const secondTopicRendered = secondTopicsRendered[0];
+
+      expect(firstTopicRendered.innerHTML).not.toEqual(secondTopicRendered.innerHTML);
+    });
 
     xit("Renders most popular topics largest", () => {});
 

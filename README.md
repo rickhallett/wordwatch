@@ -53,7 +53,7 @@ Other                 - 0.5%
 
 - To what degree should my code consider the ease with which additional features may be added over time? If this was an MVC that was likely to be developed further overtime, it might be better to start with a JavaScript framework, as it will make componentisation easier in the future. Testing should also be mostly focused on the end user experience, not the implementation details.
 
-- Is it sufficient, for the time being, to just load the JSON file into memory locally? The spec doesn't mention requesting this over HTTP. Presumably in a reald world usecase, it is almost certain the data would come from a remote source, but we don't know what that is yet. Provided the data retrieval code is decoupled from the actual source, we can easily switch that out later by means of interface.
+- Is it sufficient, for the time being, to just load the JSON file into memory locally? The spec doesn't mention requesting this over HTTP. Presumably in a real world usecase, it is almost certain the data would come from a remote source, but we don't know what that is yet. Provided the data retrieval code is decoupled from the actual source, we can easily switch that out later by means of interface.
 
 - Why do I feel such a desire to deploy a built solution that pulls the JSON data remotely from another server, with extra features like choosing the data set. Honestly I'm like a _dog digging for bones_.
 
@@ -128,21 +128,13 @@ Solution:
 
 Challenge:
 
-Solution:
-
-Challenge:
-
-Solution:
-
-Challenge:
-
-Solution:
+- Getting react testing library to wait for wordcloud re-render
 
 ---
 
-## Getting started guide
+## If I had more time...
 
-`git clone https://github.com/rickhallett/three-sided-poke.git`
-`cd three-sided-poke`
-`npm i`
-`npm build`
+1. Make tests more efficient by mocking the 'api' call, as opposed to processing the entire topics.json each time.
+2. Screenshot tests for layout changes
+3. Understand whats going on with react testing library in regards to checking a component after it has been re-rendered
+4. In retrospect, I could have done this quicker with vanilla JavaScript; the unfamiliar abstractions of React slowed me down probably 5x.
