@@ -112,11 +112,19 @@ Other: Most mobile device browsers are likely to handle Flexbox
 
 Challenge:
 
+- Attempted to construct a re-usable TopicElement component that could generate HTML on the fly, see commit history. This ended up proving more problematic than it was worth.
+
 Solution:
+
+- Reverted back to separate component for each topic popularity.
 
 Challenge:
 
+- Jest kept throwing error about illegal hooks at the top of App.jsx. The [React docs](https://reactjs.org/warnings/invalid-hook-call-warning.html) and other searches didn't provide a clear solution; attempted various combinations of custom hooks, checking for React/react-dom duplicate object instances and implementing act() within the relevant test.
+
 Solution:
+
+- Stick to component tests, rather than directly targeting the App parent component.
 
 Challenge:
 
