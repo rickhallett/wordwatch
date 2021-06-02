@@ -113,17 +113,97 @@ describe("WordCloud", () => {
     ).toBe(true);
   });
 
-  xit("Renders third most popular topics third largest", () => {});
+  it("Renders third most popular topics third largest", async () => {
+    const data = await ApiInterface.getTopicData();
+    const thirdMostPopularTopicData = data.topics.filter((t) =>
+      popularityOf(t).isThird()
+    );
 
-  xit("Renders forth most popular topics forth largest", () => {});
+    const app = render(<App />);
+    const thirdTopicsRendered = app.getAllByTestId("topic-element");
 
-  xit("Renders fifth most popular topics fifth largest", () => {});
+    // TODO: find a way to do this declaritively with react-testing-library
+    const thirdMostPopularTopicsRendered = thirdTopicsRendered.filter(
+      (el) => el.outerHTML.substring(0, 3) === "<h3"
+    );
 
-  xit("Renders sixth most popular topics sixth largest", () => {});
+    expect(
+      checkRendersWithData(
+        thirdMostPopularTopicsRendered,
+        thirdMostPopularTopicData
+      )
+    ).toBe(true);
+  });
 
-  xit("Renders topics with a positive sentiment in green font", () => {});
+  it("Renders forth most popular topics forth largest", async () => {
+    const data = await ApiInterface.getTopicData();
+    const forthMostPopularTopicData = data.topics.filter((t) =>
+      popularityOf(t).isForth()
+    );
 
-  xit("Renders topics with a neutral sentiment in gray font", () => {});
+    const app = render(<App />);
+    const forthTopicsRendered = app.getAllByTestId("topic-element");
 
-  xit("Renders topics with a negative sentiment in red font", () => {});
+    // TODO: find a way to do this declaritively with react-testing-library
+    const forthMostPopularTopicsRendered = forthTopicsRendered.filter(
+      (el) => el.outerHTML.substring(0, 3) === "<h4"
+    );
+
+    expect(
+      checkRendersWithData(
+        forthMostPopularTopicsRendered,
+        forthMostPopularTopicData
+      )
+    ).toBe(true);
+  });
+
+  it("Renders fifth most popular topics fifth largest", async () => {
+    const data = await ApiInterface.getTopicData();
+    const fifthMostPopularTopicData = data.topics.filter((t) =>
+      popularityOf(t).isFifth()
+    );
+
+    const app = render(<App />);
+    const fifthTopicsRendered = app.getAllByTestId("topic-element");
+
+    // TODO: find a way to do this declaritively with react-testing-library
+    const fifthMostPopularTopicsRendered = fifthTopicsRendered.filter(
+      (el) => el.outerHTML.substring(0, 3) === "<h5"
+    );
+
+    expect(
+      checkRendersWithData(
+        fifthMostPopularTopicsRendered,
+        fifthMostPopularTopicData
+      )
+    ).toBe(true);
+  });
+
+  it("Renders sixth most popular topics sixth largest", async () => {
+    const data = await ApiInterface.getTopicData();
+    const sixthMostPopularTopicData = data.topics.filter((t) =>
+      popularityOf(t).isSixth()
+    );
+
+    const app = render(<App />);
+    const sixthTopicsRendered = app.getAllByTestId("topic-element");
+
+    // TODO: find a way to do this declaritively with react-testing-library
+    const sixthMostPopularTopicsRendered = sixthTopicsRendered.filter(
+      (el) => el.outerHTML.substring(0, 3) === "<h6"
+    );
+
+    expect(
+      checkRendersWithData(
+        sixthMostPopularTopicsRendered,
+        sixthMostPopularTopicData
+      )
+    ).toBe(true);
+  });
+
+  xit("Renders topics with a positive sentiment in green font", async () => {});
+
+  xit("Renders topics with a neutral sentiment in gray font", async () => {});
+
+  xit("Renders topics with a negative sentiment in red font", async () => {});
 });
