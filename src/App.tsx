@@ -11,12 +11,14 @@ import { Header } from "./components/Header";
 import { selectRandomTopic } from "./util/selectRandomTopic";
 
 import { ApiInterface } from "./util/getTopicData";
-import rawData from './topics.json';
+import rawData from "./topics.json";
 
 const App = (): JSX.Element => {
   const data: WordCloudData = rawData;
   const [topicData, setTopicData] = useState<Topic[]>(data.topics);
-  const [activeTopic, setActiveTopic] = useState<Topic>({} as Topic);
+  const [activeTopic, setActiveTopic] = useState<Topic>(
+    selectRandomTopic(data.topics)
+  );
 
   // DEPRECATED: updating state on render was causing problems with testing; probably this means it was not a good solution
   // useEffect(() => {
