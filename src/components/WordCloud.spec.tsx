@@ -70,7 +70,6 @@ describe("WordCloud", () => {
     const app = render(<App />);
     const firstTopicsRendered = app.getAllByTestId("topic-element");
 
-    // TODO: find a way to do this declaritively with react-testing-library
     const firstMostPopularTopicsRendered = firstTopicsRendered.filter(
       (el) => el.outerHTML.substring(0, 3) === "<h1"
     );
@@ -92,7 +91,6 @@ describe("WordCloud", () => {
     const app = render(<App />);
     const secondTopicsRendered = app.getAllByTestId("topic-element");
 
-    // TODO: find a way to do this declaritively with react-testing-library
     const secondMostPopularTopicsRendered = secondTopicsRendered.filter(
       (el) => el.outerHTML.substring(0, 3) === "<h2"
     );
@@ -114,7 +112,6 @@ describe("WordCloud", () => {
     const app = render(<App />);
     const thirdTopicsRendered = app.getAllByTestId("topic-element");
 
-    // TODO: find a way to do this declaritively with react-testing-library
     const thirdMostPopularTopicsRendered = thirdTopicsRendered.filter(
       (el) => el.outerHTML.substring(0, 3) === "<h3"
     );
@@ -136,7 +133,6 @@ describe("WordCloud", () => {
     const app = render(<App />);
     const forthTopicsRendered = app.getAllByTestId("topic-element");
 
-    // TODO: find a way to do this declaritively with react-testing-library
     const forthMostPopularTopicsRendered = forthTopicsRendered.filter(
       (el) => el.outerHTML.substring(0, 3) === "<h4"
     );
@@ -158,7 +154,6 @@ describe("WordCloud", () => {
     const app = render(<App />);
     const fifthTopicsRendered = app.getAllByTestId("topic-element");
 
-    // TODO: find a way to do this declaritively with react-testing-library
     const fifthMostPopularTopicsRendered = fifthTopicsRendered.filter(
       (el) => el.outerHTML.substring(0, 3) === "<h5"
     );
@@ -180,7 +175,6 @@ describe("WordCloud", () => {
     const app = render(<App />);
     const sixthTopicsRendered = app.getAllByTestId("topic-element");
 
-    // TODO: find a way to do this declaritively with react-testing-library
     const sixthMostPopularTopicsRendered = sixthTopicsRendered.filter(
       (el) => el.outerHTML.substring(0, 3) === "<h6"
     );
