@@ -5,6 +5,7 @@ import {
   screen,
   waitFor,
   waitForElementToBeRemoved,
+  cleanup
 } from "@testing-library/react";
 import { act } from "react-dom/test-utils";
 import App from "./App";
@@ -13,13 +14,38 @@ import { Topic } from "./types";
 import { WordCloud } from "./components/WordCloud";
 import { ApiInterface } from "./util/getTopicData";
 
+/**
+ * rennder w/o crash ok
+ * explicit clean up    afterEach(rtl.cleanup)
+ * dumb components; are they easy to test? Does the button/label register a click? It doesnt care what the click does; strike with mocked function
+ * the more complex out testing fns, the more likely we will have bugs in them; easy tests come from code that is more reusable
+ * if you find yourself checking something more than once, that should probably be cemented in a test
+ */
+
 const noop = () => {};
 
 describe("App", () => {
-  xit("Does not throw on multiple page loads (stress test the data)", () => {});
+  /**
+   * ERROR
+   * When testing, code that causes React state updates should be wrapped into act(...):
+
+    act(() => {
+      // fire events that effect state
+    });
+    assert on the output
+
+    This ensures that you're testing the behavior the user would see in the browser. Learn more at https://reactjs.org/link/wrap-tests-with-act
+        at App (/Users/kaishin/dev/react/wordwatch/src/App.tsx:17:37)
+
+    SOLUTIONS
+    - is this happening because the rendering of app itself causes state updates, which then trigger another render? If so, could I solve this by passing the initial data as props?
+   */
+  it("App does not crash", () => {
+    render(<App />);
+  });
 
   describe("Header", () => {
-    it("Renders the header", () => {
+    xit("Renders the header", () => {
       // TODO: why does act() not deal with the app state update on render?
       act(() => {
         render(<Header />);
@@ -54,14 +80,14 @@ describe("App", () => {
   });
 
   describe("WordCloud", () => {
-    it("If there are no topics, the user is meaningfully notified", () => {
+    xit("If there are no topics, the user is meaningfully notified", () => {
       const wordCloud = render(<WordCloud topics={[]} onWordSelect={noop} />);
 
       const userNotificationPresent = Boolean(screen.getByText("No topics!"));
       expect(userNotificationPresent).toEqual(true);
     });
 
-    it("Renders the correct number of topics", async () => {
+    xit("Renders the correct number of topics", async () => {
       const data = await ApiInterface.getTopicData();
       const expectedLength = data.topics.length;
 
@@ -121,6 +147,8 @@ describe("App", () => {
     xit("If there is no topic selected, the component does not throw", () => {});
 
     xit("If there is no topic selected, the user is meaningfully notified", () => {});
+
+    xit('If a topic is selected, this topic appears in the metacloud', () => {});
 
     xit("If there are there are no positive mentions, the total is rendered as 0", () => {});
   });
