@@ -66,7 +66,7 @@ describe("App", () => {
       expect(userNotificationPresent).toEqual(true);
     });
 
-    xit("Renders the correct number of topics", async () => {
+    it("Renders the correct number of topics", async () => {
       const data = await ApiInterface.getTopicData();
       const expectedLength = data.topics.length;
 
