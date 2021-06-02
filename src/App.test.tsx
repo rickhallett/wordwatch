@@ -1,6 +1,15 @@
-import { render, screen, cleanup } from "@testing-library/react";
+import {
+  render,
+  screen,
+  cleanup,
+  fireEvent,
+  act,
+} from "@testing-library/react";
 import App from "./App";
 import { Header } from "./components/Header";
+import { MetaCloud } from "./components/MetaCloud";
+import { WordCloud } from "./components/WordCloud";
+import { ApiInterface } from "./util/getTopicData";
 
 const noop = () => {};
 
@@ -27,5 +36,21 @@ describe("App", () => {
   it("Renders with an initially selected topic", () => {
     const wrapper = render(<App />);
     const metacloud = wrapper.getByTestId("metacloud");
+  });
+
+  it("If a topic is selected, this topic appears in the metacloud", () => {
+    const app = render(<App />);
+
+    const firstTopicRendered = app.getAllByTestId(
+      "first-popular-topic-element"
+    )[0];
+
+    fireEvent.click(firstTopicRendered);
+
+    const activeTopicAfterClick = app.getByTestId("activetopic-label");
+
+    expect(activeTopicAfterClick.innerHTML).toEqual(
+      firstTopicRendered.innerHTML
+    );
   });
 });

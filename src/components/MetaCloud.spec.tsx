@@ -22,7 +22,5 @@ describe("MetaCloud", () => {
     expect(notification.innerHTML).toEqual("No topic selected!");
   });
 
-  xit("If a topic is selected, this topic appears in the metacloud", () => {});
-
   xit("If there are there are no positive mentions, the total is rendered as 0", () => {});
 });

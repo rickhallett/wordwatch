@@ -20,7 +20,10 @@ export const MetaCloud = ({
       <table className="shadow-lg bg-white mx-auto">
         <thead>
           <tr>
-            <th className="bg-gray-300 border text-lefr px-6 py-4">
+            <th
+              className="bg-gray-300 border text-lefr px-6 py-4"
+              data-testid="activetopic-label"
+            >
               {activeTopic.label || null}
             </th>
             <th className="bg-gray-300 border text-lefr px-6 py-4"></th>
