@@ -14,6 +14,18 @@ import { ApiInterface } from "./util/getTopicData";
 import rawData from "./topics.json";
 
 const App = (): JSX.Element => {
+  // TODO: find a way to fetch data asynchronously without causing render errors, and ONLY fetching this data on app initialisation, not re-render
+  // let seedData: WordCloudData = {} as WordCloudData;
+  // useEffect(() => {
+  //   const fetchData = async () => {
+  //     seedData = await ApiInterface.getTopicData();
+  //   };
+  //   return () => {
+  //     seedData = {} as WordCloudData;
+  //   };
+
+  //   fetchData();
+  // }, []);
   const data: WordCloudData = rawData;
   const [topicData, setTopicData] = useState<Topic[]>(data.topics);
   const [activeTopic, setActiveTopic] = useState<Topic>(

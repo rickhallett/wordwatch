@@ -74,7 +74,6 @@ describe("App", () => {
         <WordCloud topics={data.topics} onWordSelect={noop} />
       );
       const topicsRendered = wordCloud.getAllByRole("heading");
-
       expect(topicsRendered.length).toEqual(expectedLength);
     });
 
