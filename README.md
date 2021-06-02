@@ -127,3 +127,4 @@ Other: Most mobile device browsers are likely to handle Flexbox
 3. Understand whats going on with react testing library in regards to checking a component after it has been re-rendered
 4. Split test specs into separate component files
 5. In retrospect, I could have done this quicker with vanilla JavaScript; the unfamiliar abstractions of React slowed me down probably 5x.
+6. More than any other coding experience, this has demonstrated to me the value of creating tests DURING development, not just after..!
