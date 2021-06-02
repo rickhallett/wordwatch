@@ -1,13 +1,5 @@
-import {
-  screen,
-  fireEvent,
-  render,
-  waitFor,
-  cleanup,
-} from "@testing-library/react";
-import { formatDiagnosticsWithColorAndContext } from "typescript";
+import { screen, fireEvent, render, cleanup } from "@testing-library/react";
 import App from "../App";
-import { Topic } from "../types";
 import { popularityOf } from "../util/constants";
 import { ApiInterface } from "../util/getTopicData";
 import { WordCloud } from "./WordCloud";
@@ -21,25 +13,6 @@ const checkRendersWithData = (
   return renderedElements.every((rendered) =>
     topicData.find((datum) => datum.label === rendered.innerHTML)
   );
-};
-
-const consoleRendersWithData = (
-  renderedElements: HTMLElement[],
-  topicData: any[]
-): boolean => {
-  console.log("renderedElements", renderedElements);
-  console.log("topicData", topicData);
-  return renderedElements.every((rendered) => {
-    console.log("rendered", rendered);
-    const td = topicData.find((datum) => {
-      if (datum.label === rendered.innerHTML) {
-        console.log("rendered.innerHTML", rendered.innerHTML);
-      }
-      return datum.label === rendered.innerHTML;
-    });
-    console.log("td", td);
-    return td;
-  });
 };
 
 describe("WordCloud", () => {
