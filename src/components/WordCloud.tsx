@@ -6,6 +6,8 @@ import { SixthPopularTopic } from "./topics/SixthPopularTopic";
 import { ThirdPopularTopic } from "./topics/ThirdPopularTopic";
 
 import { Topic } from "../types";
+import { popularityOf } from "../util/constants";
+import { shuffleTopics } from "../util/shuffleTopics";
 
 export const WordCloud = ({
   topics,
@@ -14,8 +16,7 @@ export const WordCloud = ({
   topics: Topic[];
   onWordSelect: any;
 }): JSX.Element => {
-
-  topics.sort(() => Math.random() - 0.5);
+  shuffleTopics(topics);
 
   const onWordSelectEvent = (event: any, id: string) => {
     onWordSelect(event, id);
@@ -26,13 +27,16 @@ export const WordCloud = ({
       <section className="bg-gray-200 ml-6 mr-6 mb-6 p-6 md:w-2/3 h-xl flex flex-col justify-center">
         <h2 className="text-3xl text-gray-500">No topics!</h2>
       </section>
-    )
+    );
   }
 
   return (
-    <section className="bg-gray-200 ml-6 mr-6 mb-6 p-6 md:w-2/3 h-xl" data-testid="wordcloud">
+    <section
+      className="bg-gray-200 ml-6 mr-6 mb-6 p-6 md:w-2/3 h-xl"
+      data-testid="wordcloud"
+    >
       {topics.map((topic: Topic, index: number) => {
-        if (topic.volume >= 50) {
+        if (popularityOf(topic).isFirst()) {
           return (
             <FirstPopularTopic
               key={topic.id}
@@ -41,7 +45,7 @@ export const WordCloud = ({
             />
           );
         }
-        if (topic.volume >= 40) {
+        if (popularityOf(topic).isSecond()) {
           return (
             <SecondPopularTopic
               key={topic.id}
@@ -50,7 +54,7 @@ export const WordCloud = ({
             />
           );
         }
-        if (topic.volume >= 30) {
+        if (popularityOf(topic).isThird()) {
           return (
             <ThirdPopularTopic
               key={topic.id}
@@ -59,7 +63,7 @@ export const WordCloud = ({
             />
           );
         }
-        if (topic.volume >= 20) {
+        if (popularityOf(topic).isForth) {
           return (
             <ForthPopularTopic
               key={topic.id}
@@ -68,7 +72,7 @@ export const WordCloud = ({
             />
           );
         }
-        if (topic.volume >= 10) {
+        if (popularityOf(topic).isFifth) {
           return (
             <FifthPopularTopic
               key={topic.id}

@@ -1,6 +1,7 @@
 import { screen, fireEvent, render, waitFor } from "@testing-library/react";
 import App from "../App";
 import { Topic } from "../types";
+import { popularityOf } from "../util/constants";
 import { ApiInterface } from "../util/getTopicData";
 import { WordCloud } from "./WordCloud";
 
@@ -42,7 +43,27 @@ describe("WordCloud", () => {
     );
   });
 
-  xit("Renders most popular topics largest", () => {});
+  /**
+   * Tests ensuring screen reader accessibility
+   */
+  it("Renders most popular topics largest", async () => {
+    const data = await ApiInterface.getTopicData();
+    const firstMostPopularTopicData = data.topics.find((t) =>
+      popularityOf(t).isFirst()
+    );
+
+    const app = render(<App />);
+    const firstTopicsRendered = app.getAllByTestId("topic-element");
+
+    // TODO: find a way to do this declaritively with react-testing-library
+    const firstMostPopularTopicRendered = firstTopicsRendered.find(
+      (el) => el.outerHTML.substring(0, 3) === "<h1"
+    );
+
+    expect(firstMostPopularTopicRendered?.innerHTML).toEqual(
+      firstMostPopularTopicData?.label
+    );
+  });
 
   xit("Renders second most popular topics second largest", () => {});
 
