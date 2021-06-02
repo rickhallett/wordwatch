@@ -54,21 +54,18 @@ describe("WordCloud", () => {
     };
 
     expect(checkShuffled()).toBe(true);
-
-    // expect(firstTopicsRendered[0].innerHTML).not.toEqual(
-    //   secondTopicsRendered[0].innerHTML
-    // );
   });
 
   /**
    * Tests ensuring screen reader accessibility
    */
-  // TODO: this intermittently fails, presumably due to the test as opposed to tested code
-  xit("Renders most popular topics largest", async () => {
+  it("Renders most popular topics largest", async () => {
     const data = await ApiInterface.getTopicData();
     const firstMostPopularTopicData = data.topics.find((t) =>
-      popularityOf(t).isSecond()
+      popularityOf(t).isFirst()
     );
+
+    // console.log("firstMostPopularTopicData", firstMostPopularTopicData);
 
     const app = render(<App />);
     const firstTopicsRendered = app.getAllByTestId("topic-element");
@@ -78,21 +75,23 @@ describe("WordCloud", () => {
       (el) => el.outerHTML.substring(0, 3) === "<h1"
     );
 
+    // screen.debug(firstMostPopularTopicRendered);
+
     expect(firstMostPopularTopicRendered?.innerHTML).toEqual(
       firstMostPopularTopicData?.label
     );
   });
 
-  xit("Renders second most popular topics second largest", async () => {
+  it("Renders second most popular topics second largest", async () => {
     const data = await ApiInterface.getTopicData();
     const firstSecondMostPopularTopicData = data.topics.find((t) =>
-      popularityOf(t).isThird()
+      popularityOf(t).isSecond()
     );
 
-    // console.log(
-    //   "firstSecondMostPopularTopicData",
-    //   firstSecondMostPopularTopicData
-    // );
+    console.log(
+      "firstSecondMostPopularTopicData",
+      firstSecondMostPopularTopicData
+    );
 
     const app = render(<App />);
     const secondTopicsRendered = app.getAllByTestId("topic-element");
@@ -102,7 +101,7 @@ describe("WordCloud", () => {
       (el) => el.outerHTML.substring(0, 3) === "<h2"
     );
 
-    // screen.debug(firstSecondMostPopularTopicRendered);
+    screen.debug(firstSecondMostPopularTopicRendered);
 
     // console.log("firstMostPopularTopicRendered", firstMostPopularTopicRendered);
 
