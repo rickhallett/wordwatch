@@ -128,3 +128,18 @@ Other: Most mobile device browsers are likely to handle Flexbox
 4. Split test specs into separate component files
 5. In retrospect, I could have done this quicker with vanilla JavaScript; the unfamiliar abstractions of React slowed me down probably 5x.
 6. More than any other coding experience, this has demonstrated to me the value of creating tests DURING development, not just after..!
+
+## Running instructions
+
+Clone repository:
+`git clone https://github.com/rickhallett/wordwatch.git`
+
+Install dependencies:
+`cd wordwatch`
+`npm install`
+
+Run application:
+`npm run start`
+
+Run tests:
+`npm run test`
