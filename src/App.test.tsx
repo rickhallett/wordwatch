@@ -52,6 +52,11 @@ describe("App", () => {
     expect(wordcloud.children.length).toBeGreaterThan(0);
   });
 
+  it("Renders with an initially selected topic", () => {
+    const wrapper = render(<App />);
+    const metacloud = wrapper.getByTestId("metacloud");
+  });
+
   describe("Header", () => {
     xit("Renders the header", () => {
       // TODO: why does act() not deal with the app state update on render?

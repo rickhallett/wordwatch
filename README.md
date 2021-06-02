@@ -137,4 +137,5 @@ Challenge:
 1. Make tests more efficient by mocking the 'api' call, as opposed to processing the entire topics.json each time.
 2. Screenshot tests for layout changes
 3. Understand whats going on with react testing library in regards to checking a component after it has been re-rendered
-4. In retrospect, I could have done this quicker with vanilla JavaScript; the unfamiliar abstractions of React slowed me down probably 5x.
+4. Split test specs into separate component files
+5. In retrospect, I could have done this quicker with vanilla JavaScript; the unfamiliar abstractions of React slowed me down probably 5x.

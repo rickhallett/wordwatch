@@ -20,6 +20,7 @@ const App = (): JSX.Element => {
     selectRandomTopic(data.topics)
   );
 
+  // const [activeTopic, setActiveTopic] = useState<Topic>();
   // DEPRECATED: updating state on render was causing problems with testing; probably this means it was not a good solution
   // useEffect(() => {
   //   const asyncFetch = async () => {
