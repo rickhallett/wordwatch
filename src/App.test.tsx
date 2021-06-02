@@ -25,6 +25,18 @@ import { ForthPopularTopic } from "./components/topics/ForthPopularTopic";
 
 const noop = () => {};
 
+// TODO: DRY up topic element set up
+// const setUpTopicElementAndClick = async (element: JSX.Element): void => {
+//   const data = await ApiInterface.getTopicData();
+//   const clicked = jest.fn();
+//   const topicElement = render(
+//     <ForthPopularTopic topic={data.topics[0]} onWordSelect={clicked} />
+//   );
+//   const topicHeading = topicElement.getByRole("heading");
+//   fireEvent.click(topicHeading);
+//   expect(clicked).toHaveBeenCalled();
+// }
+
 describe("App", () => {
   afterEach(cleanup);
 
