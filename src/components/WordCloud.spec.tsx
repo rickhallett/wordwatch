@@ -38,8 +38,6 @@ describe("WordCloud", () => {
     expect(topicsRendered.length).toEqual(expectedLength);
   });
 
-  // BUG: this intermittently fails, presumably due to the test as opposed to tested code
-  // TODO: change shuffle check logic to check for the repositioning of at least one element
   it("Renders topics in a shuffed order on each topic click", () => {
     const app = render(<App />);
     const firstTopicsRendered = app.getAllByTestId("topic-element");
@@ -49,7 +47,7 @@ describe("WordCloud", () => {
     const secondTopicsRendered = app.getAllByTestId("topic-element");
 
     const checkShuffled = (): boolean => {
-      return firstTopicsRendered.every(
+      return firstTopicsRendered.some(
         (topic, index) =>
           topic.innerHTML !== secondTopicsRendered[index].innerHTML
       );
