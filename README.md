@@ -117,6 +117,7 @@ Other: Most mobile device browsers are likely to handle Flexbox
 - Solution: removing all setState from App render cycles
 
 - Challenge: Getting react testing library to wait for wordcloud re-render
+- Solution: It was a case of making better sense of the react-testing-library, and using data-id selectors. Whilst this is not ideal, I found it difficult and laboriuous to find ways of meeting the use case with the semantic query API function set.
 
 ---
 
@@ -125,6 +126,7 @@ Other: Most mobile device browsers are likely to handle Flexbox
 1. Make tests more efficient by mocking the 'api' call, as opposed to processing the entire topics.json each time.
 2. Screenshot tests for layout changes
 3. Look for a way to dry up topic element set up and testing; its readable, but very repetitive
+4. Improve the responsive styling; there are inline element wrapping errors depending on the order of topic element sizes
 
 In retrospect, I could have done this quicker with vanilla JavaScript; the unfamiliar abstractions of React/react-testing-library probably slowed me down 5x.
 
