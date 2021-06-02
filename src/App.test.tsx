@@ -12,6 +12,7 @@ import App from "./App";
 import { Header } from "./components/Header";
 import { Topic } from "./types";
 import { WordCloud } from "./components/WordCloud";
+import { FirstPopularTopic } from "./components/topics/FirstPopularTopic";
 import { ApiInterface } from "./util/getTopicData";
 
 /**
@@ -78,6 +79,8 @@ describe("App", () => {
     });
 
     // BUG: despite click event, matcher returns equality. There is some issue here with the asynchonous stack
+    // NB: this might be due to the state changing in a parent component; what happens if we raise this test to app level? Does render output a static RenderResult, or one that changes on change of props?
+    // Wordcloud should be a dumb component; it should have no knowledge of where the topics come from
     xit("Renders topics in a shuffed order on each topic click", async () => {
       const data = await ApiInterface.getTopicData();
       const wordCloud = render(
@@ -131,5 +134,23 @@ describe("App", () => {
     xit("If a topic is selected, this topic appears in the metacloud", () => {});
 
     xit("If there are there are no positive mentions, the total is rendered as 0", () => {});
+  });
+
+  describe("FirstPopularTopic", () => {
+    it("Renders without crashing", async () => {
+      const data = await ApiInterface.getTopicData();
+      render(<FirstPopularTopic topic={{} as Topic} onWordSelect={noop} />);
+    });
+
+    // it("Handles a click event via props", async () => {
+    //   const data = await ApiInterface.getTopicData();
+    //   const clicked = jest.fn();
+    //   const topicElement = render(
+    //     <FirstPopularTopic topic={data.topics[0]} onWordSelect={clicked} />
+    //   );
+    //   const topicHeading = topicElement.getByRole("heading");
+    //   fireEvent.click(topicHeading);
+    //   expect(clicked).toHaveBeenCalled();
+    // });
   });
 });

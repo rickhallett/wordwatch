@@ -110,25 +110,13 @@ Other: Most mobile device browsers are likely to handle Flexbox
 
 ## Challenges and solutions
 
-Challenge:
+- Challenge: Attempted to construct a re-usable TopicElement component that could generate HTML on the fly, see commit history. This ended up proving more problematic than it was worth.
+- Solution: Reverted back to separate component for each topic popularity.
 
-- Attempted to construct a re-usable TopicElement component that could generate HTML on the fly, see commit history. This ended up proving more problematic than it was worth.
+- Challenge: Jest kept throwing error about illegal hooks at the top of App.jsx. The [React docs](https://reactjs.org/warnings/invalid-hook-call-warning.html) and other searches didn't provide a clear solution; attempted various combinations of custom hooks, checking for React/react-dom duplicate object instances and implementing act() within the relevant test.
+- Solution: removing all setState from App render cycles
 
-Solution:
-
-- Reverted back to separate component for each topic popularity.
-
-Challenge:
-
-- Jest kept throwing error about illegal hooks at the top of App.jsx. The [React docs](https://reactjs.org/warnings/invalid-hook-call-warning.html) and other searches didn't provide a clear solution; attempted various combinations of custom hooks, checking for React/react-dom duplicate object instances and implementing act() within the relevant test.
-
-Solution:
-
-- Stick to component tests, rather than directly targeting the App parent component. Its probably worth noting I have almost no experience with unit testing browser output.
-
-Challenge:
-
-- Getting react testing library to wait for wordcloud re-render
+- Challenge: Getting react testing library to wait for wordcloud re-render
 
 ---
 
