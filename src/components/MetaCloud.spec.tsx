@@ -10,13 +10,17 @@ describe("MetaCloud", () => {
     render(<MetaCloud activeTopic={{} as Topic} />);
   });
 
-  xit("If there is no topic selected, the component does not throw", async () => {
+  it("If there is no topic selected, the component does not throw", async () => {
     const data = await ApiInterface.getTopicData();
     const topic = data.topics[0];
     render(<MetaCloud activeTopic={topic} />);
   });
 
-  xit("If there is no topic selected, the user is meaningfully notified", () => {});
+  it("If there is no topic selected, the user is meaningfully notified", () => {
+    const metacloud = render(<MetaCloud activeTopic={{} as Topic} />);
+    const notification = metacloud.getByText("No topic selected!");
+    expect(notification.innerHTML).toEqual("No topic selected!");
+  });
 
   xit("If a topic is selected, this topic appears in the metacloud", () => {});
 
