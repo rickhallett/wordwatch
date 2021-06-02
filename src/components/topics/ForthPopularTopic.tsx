@@ -18,7 +18,11 @@ export const ForthPopularTopic = ({
     <div
       className={`text-3xl text-${sentimentColour}-400 max-w-max inline p-2`}
     >
-      <h4 className="inline" onClick={onWordSelectEvent}>
+      <h4
+        className="inline"
+        onClick={onWordSelectEvent}
+        data-testid="topic-element"
+      >
         {topic.label}
       </h4>
     </div>

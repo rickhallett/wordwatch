@@ -21,7 +21,7 @@ export const FirstPopularTopic = ({
       <h1
         className="inline"
         onClick={onWordSelectEvent}
-        data-testid="first-popular-topic-element"
+        data-testid="topic-element"
       >
         {topic.label}
       </h1>

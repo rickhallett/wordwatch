@@ -1,9 +1,7 @@
-import { fireEvent, render } from "@testing-library/react";
+import { render } from "@testing-library/react";
 import { Topic } from "../types";
 import { ApiInterface } from "../util/getTopicData";
 import { MetaCloud } from "./MetaCloud";
-
-const noop = () => {};
 
 describe("MetaCloud", () => {
   it("Renders without crashing", () => {

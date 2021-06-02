@@ -41,16 +41,14 @@ describe("App", () => {
   it("If a topic is selected, this topic appears in the metacloud", () => {
     const app = render(<App />);
 
-    const firstTopicRendered = app.getAllByTestId(
-      "first-popular-topic-element"
-    )[0];
+    const firstTopicsRendered = app.getAllByTestId("topic-element");
 
-    fireEvent.click(firstTopicRendered);
+    fireEvent.click(firstTopicsRendered[0]);
 
     const activeTopicAfterClick = app.getByTestId("activetopic-label");
 
     expect(activeTopicAfterClick.innerHTML).toEqual(
-      firstTopicRendered.innerHTML
+      firstTopicsRendered[0].innerHTML
     );
   });
 });

@@ -1,4 +1,5 @@
 import { screen, fireEvent, render, waitFor } from "@testing-library/react";
+import App from "../App";
 import { Topic } from "../types";
 import { ApiInterface } from "../util/getTopicData";
 import { WordCloud } from "./WordCloud";
@@ -28,32 +29,16 @@ describe("WordCloud", () => {
     expect(topicsRendered.length).toEqual(expectedLength);
   });
 
-  // BUG: despite click event, matcher returns equality. There is some issue here with the asynchonous stack
-  // NB: this might be due to the state changing in a parent component; what happens if we raise this test to app level? Does render output a static RenderResult, or one that changes on change of props?
-  // Wordcloud should be a dumb component; it should have no knowledge of where the topics come from
-  xit("Renders topics in a shuffed order on each topic click", async () => {
-    const data = await ApiInterface.getTopicData();
-    const wordCloud = render(
-      <WordCloud topics={data.topics} onWordSelect={noop} />
-    );
+  it("Renders topics in a shuffed order on each topic click", () => {
+    const app = render(<App />);
+    const firstTopicsRendered = app.getAllByTestId("topic-element");
 
-    const firstTopicRendered = wordCloud.getAllByRole("heading")[0];
-    console.log("firstTopicRendered", firstTopicRendered);
+    fireEvent.click(firstTopicsRendered[0]);
 
-    const clicked = await fireEvent.click(firstTopicRendered);
-    console.log("clicked", clicked);
+    const secondTopicsRendered = app.getAllByTestId("topic-element");
 
-    await waitFor(() => {
-      expect(firstTopicRendered.innerHTML).not.toEqual(
-        wordCloud.getAllByRole("heading")[0]
-      );
-    });
-
-    const secondTopicsRendered = await wordCloud.findAllByRole("heading");
-    const secondTopicRendered = secondTopicsRendered[0];
-
-    expect(firstTopicRendered.innerHTML).not.toEqual(
-      secondTopicRendered.innerHTML
+    expect(firstTopicsRendered[0].innerHTML).not.toEqual(
+      secondTopicsRendered[0].innerHTML
     );
   });
 

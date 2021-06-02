@@ -18,7 +18,11 @@ export const FifthPopularTopic = ({
     <div
       className={`text-2xl text-${sentimentColour}-400 max-w-max inline p-2`}
     >
-      <h5 className="inline" onClick={onWordSelectEvent}>
+      <h5
+        className="inline"
+        onClick={onWordSelectEvent}
+        data-testid="topic-element"
+      >
         {topic.label}
       </h5>
     </div>
