@@ -1,4 +1,10 @@
-import { screen, fireEvent, render, waitFor } from "@testing-library/react";
+import {
+  screen,
+  fireEvent,
+  render,
+  waitFor,
+  cleanup,
+} from "@testing-library/react";
 import App from "../App";
 import { Topic } from "../types";
 import { popularityOf } from "../util/constants";
@@ -8,6 +14,8 @@ import { WordCloud } from "./WordCloud";
 const noop = () => {};
 
 describe("WordCloud", () => {
+  afterEach(cleanup);
+
   it("Renders the WordCloud without crashing", () => {
     render(<WordCloud topics={[]} onWordSelect={noop} />);
   });
@@ -30,6 +38,7 @@ describe("WordCloud", () => {
     expect(topicsRendered.length).toEqual(expectedLength);
   });
 
+  // TODO: this intermittently fails, presumably due to the test as opposed to tested code
   it("Renders topics in a shuffed order on each topic click", () => {
     const app = render(<App />);
     const firstTopicsRendered = app.getAllByTestId("topic-element");
@@ -46,10 +55,11 @@ describe("WordCloud", () => {
   /**
    * Tests ensuring screen reader accessibility
    */
+  // TODO: this intermittently fails, presumably due to the test as opposed to tested code
   it("Renders most popular topics largest", async () => {
     const data = await ApiInterface.getTopicData();
     const firstMostPopularTopicData = data.topics.find((t) =>
-      popularityOf(t).isFirst()
+      popularityOf(t).isSecond()
     );
 
     const app = render(<App />);
@@ -65,7 +75,33 @@ describe("WordCloud", () => {
     );
   });
 
-  xit("Renders second most popular topics second largest", () => {});
+  it("Renders second most popular topics second largest", async () => {
+    const data = await ApiInterface.getTopicData();
+    const firstSecondMostPopularTopicData = data.topics.find((t) =>
+      popularityOf(t).isThird()
+    );
+
+    console.log(
+      "firstSecondMostPopularTopicData",
+      firstSecondMostPopularTopicData
+    );
+
+    const app = render(<App />);
+    const secondTopicsRendered = app.getAllByTestId("topic-element");
+
+    // TODO: find a way to do this declaritively with react-testing-library
+    const firstSecondMostPopularTopicRendered = secondTopicsRendered.find(
+      (el) => el.outerHTML.substring(0, 3) === "<h2"
+    );
+
+    screen.debug(firstSecondMostPopularTopicRendered);
+
+    // console.log("firstMostPopularTopicRendered", firstMostPopularTopicRendered);
+
+    expect(firstSecondMostPopularTopicRendered?.innerHTML).toEqual(
+      firstSecondMostPopularTopicData?.label
+    );
+  });
 
   xit("Renders third most popular topics third largest", () => {});
 

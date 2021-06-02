@@ -1,4 +1,4 @@
-import { fireEvent, render } from "@testing-library/react";
+import { cleanup, fireEvent, render } from "@testing-library/react";
 import { Topic } from "../../types";
 import { ApiInterface } from "../../util/getTopicData";
 import { ForthPopularTopic } from "./ForthPopularTopic";
@@ -6,6 +6,8 @@ import { ForthPopularTopic } from "./ForthPopularTopic";
 const noop = () => {};
 
 describe("ForthPopularTopic", () => {
+  afterEach(cleanup);
+
   it("Renders without crashing", () => {
     render(<ForthPopularTopic topic={{} as Topic} onWordSelect={noop} />);
   });

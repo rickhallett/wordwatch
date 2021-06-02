@@ -1,9 +1,11 @@
-import { render } from "@testing-library/react";
+import { cleanup, render } from "@testing-library/react";
 import { Topic } from "../types";
 import { ApiInterface } from "../util/getTopicData";
 import { MetaCloud } from "./MetaCloud";
 
 describe("MetaCloud", () => {
+  afterEach(cleanup);
+
   it("Renders without crashing", () => {
     render(<MetaCloud activeTopic={{} as Topic} />);
   });

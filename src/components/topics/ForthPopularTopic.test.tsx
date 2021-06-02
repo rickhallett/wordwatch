@@ -1,4 +1,4 @@
-import { fireEvent, render } from "@testing-library/react";
+import { cleanup, fireEvent, render } from "@testing-library/react";
 import { Topic } from "../../types";
 import { ApiInterface } from "../../util/getTopicData";
 import { FifthPopularTopic } from "./FifthPopularTopic";
@@ -6,6 +6,8 @@ import { FifthPopularTopic } from "./FifthPopularTopic";
 const noop = () => {};
 
 describe("FifthPopularTopic", () => {
+  afterEach(cleanup);
+
   it("Renders without crashing", () => {
     render(<FifthPopularTopic topic={{} as Topic} onWordSelect={noop} />);
   });
