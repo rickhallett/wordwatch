@@ -142,15 +142,15 @@ describe("App", () => {
       render(<FirstPopularTopic topic={{} as Topic} onWordSelect={noop} />);
     });
 
-    // it("Handles a click event via props", async () => {
-    //   const data = await ApiInterface.getTopicData();
-    //   const clicked = jest.fn();
-    //   const topicElement = render(
-    //     <FirstPopularTopic topic={data.topics[0]} onWordSelect={clicked} />
-    //   );
-    //   const topicHeading = topicElement.getByRole("heading");
-    //   fireEvent.click(topicHeading);
-    //   expect(clicked).toHaveBeenCalled();
-    // });
+    it("Handles a click event via props", async () => {
+      const data = await ApiInterface.getTopicData();
+      const clicked = jest.fn();
+      const topicElement = render(
+        <FirstPopularTopic topic={data.topics[0]} onWordSelect={clicked} />
+      );
+      const topicHeading = topicElement.getByRole("heading");
+      fireEvent.click(topicHeading);
+      expect(clicked).toHaveBeenCalled();
+    });
   });
 });
