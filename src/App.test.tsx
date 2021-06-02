@@ -59,7 +59,7 @@ describe("App", () => {
       render(<WordCloud topics={[]} onWordSelect={noop} />);
     });
 
-    xit("If there are no topics, the user is meaningfully notified", () => {
+    it("If there are no topics, the user is meaningfully notified", () => {
       const wordCloud = render(<WordCloud topics={[]} onWordSelect={noop} />);
 
       const userNotificationPresent = Boolean(screen.getByText("No topics!"));
