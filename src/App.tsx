@@ -1,16 +1,11 @@
-import { useState, useEffect } from "react";
-
+import { useState } from "react";
 import "./index.css";
 import "./App.css";
-
 import { Topic, WordCloudData } from "./types";
-
 import { WordCloud } from "./components/WordCloud";
 import { MetaCloud } from "./components/MetaCloud";
 import { Header } from "./components/Header";
 import { selectRandomTopic } from "./util/selectRandomTopic";
-
-import { ApiInterface } from "./util/getTopicData";
 import rawData from "./topics.json";
 
 const App = (): JSX.Element => {
@@ -27,7 +22,7 @@ const App = (): JSX.Element => {
   //   fetchData();
   // }, []);
   const data: WordCloudData = rawData;
-  const [topicData, setTopicData] = useState<Topic[]>(data.topics);
+  const [topicData] = useState<Topic[]>(data.topics);
   const [activeTopic, setActiveTopic] = useState<Topic>(
     selectRandomTopic(data.topics)
   );

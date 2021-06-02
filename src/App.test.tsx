@@ -1,13 +1,10 @@
 import {
   fireEvent,
   render,
-  RenderResult,
   screen,
   waitFor,
-  waitForElementToBeRemoved,
   cleanup,
 } from "@testing-library/react";
-import { act } from "react-dom/test-utils";
 import App from "./App";
 import { Header } from "./components/Header";
 import { Topic } from "./types";
@@ -16,6 +13,7 @@ import { FirstPopularTopic } from "./components/topics/FirstPopularTopic";
 import { ApiInterface } from "./util/getTopicData";
 import { SecondPopularTopic } from "./components/topics/SecondPopularTopic";
 import { ThirdPopularTopic } from "./components/topics/ThirdPopularTopic";
+import { ForthPopularTopic } from "./components/topics/ForthPopularTopic";
 
 /**
  * rennder w/o crash ok
@@ -212,6 +210,33 @@ describe("App", () => {
       const clicked = jest.fn();
       const topicElement = render(
         <ThirdPopularTopic topic={data.topics[0]} onWordSelect={clicked} />
+      );
+      const topicHeading = topicElement.getByRole("heading");
+      fireEvent.click(topicHeading);
+      expect(clicked).toHaveBeenCalled();
+    });
+  });
+
+  describe("ForthPopularTopic", () => {
+    it("Renders without crashing", () => {
+      render(<ForthPopularTopic topic={{} as Topic} onWordSelect={noop} />);
+    });
+
+    it("Renders the topic label text", async () => {
+      const data = await ApiInterface.getTopicData();
+      const topic = data.topics[0];
+      const topicElement = render(
+        <ForthPopularTopic topic={topic} onWordSelect={noop} />
+      );
+      const topicHeading = topicElement.getByText(topic.label);
+      expect(topicHeading.innerHTML).toEqual(topic.label);
+    });
+
+    it("Handles a click event via props", async () => {
+      const data = await ApiInterface.getTopicData();
+      const clicked = jest.fn();
+      const topicElement = render(
+        <ForthPopularTopic topic={data.topics[0]} onWordSelect={clicked} />
       );
       const topicHeading = topicElement.getByRole("heading");
       fireEvent.click(topicHeading);
