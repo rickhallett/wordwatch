@@ -5,7 +5,7 @@ import {
   screen,
   waitFor,
   waitForElementToBeRemoved,
-  cleanup
+  cleanup,
 } from "@testing-library/react";
 import { act } from "react-dom/test-utils";
 import App from "./App";
@@ -42,6 +42,12 @@ describe("App", () => {
    */
   it("App does not crash", () => {
     render(<App />);
+  });
+
+  it("Renders with initial topic data", () => {
+    const wrapper = render(<App />);
+    const wordcloud = wrapper.getByTestId("wordcloud");
+    expect(wordcloud.children.length).toBeGreaterThan(0);
   });
 
   describe("Header", () => {
@@ -121,7 +127,9 @@ describe("App", () => {
       const secondTopicsRendered = await wordCloud.findAllByRole("heading");
       const secondTopicRendered = secondTopicsRendered[0];
 
-      expect(firstTopicRendered.innerHTML).not.toEqual(secondTopicRendered.innerHTML);
+      expect(firstTopicRendered.innerHTML).not.toEqual(
+        secondTopicRendered.innerHTML
+      );
     });
 
     xit("Renders most popular topics largest", () => {});
@@ -148,7 +156,7 @@ describe("App", () => {
 
     xit("If there is no topic selected, the user is meaningfully notified", () => {});
 
-    xit('If a topic is selected, this topic appears in the metacloud', () => {});
+    xit("If a topic is selected, this topic appears in the metacloud", () => {});
 
     xit("If there are there are no positive mentions, the total is rendered as 0", () => {});
   });

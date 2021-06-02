@@ -30,7 +30,7 @@ export const WordCloud = ({
   }
 
   return (
-    <section className="bg-gray-200 ml-6 mr-6 mb-6 p-6 md:w-2/3 h-xl">
+    <section className="bg-gray-200 ml-6 mr-6 mb-6 p-6 md:w-2/3 h-xl" data-testid="wordcloud">
       {topics.map((topic: Topic, index: number) => {
         if (topic.volume >= 50) {
           return (
