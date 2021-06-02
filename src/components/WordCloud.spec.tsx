@@ -23,6 +23,25 @@ const checkRendersWithData = (
   );
 };
 
+const consoleRendersWithData = (
+  renderedElements: HTMLElement[],
+  topicData: any[]
+): boolean => {
+  console.log("renderedElements", renderedElements);
+  console.log("topicData", topicData);
+  return renderedElements.every((rendered) => {
+    console.log("rendered", rendered);
+    const td = topicData.find((datum) => {
+      if (datum.label === rendered.innerHTML) {
+        console.log("rendered.innerHTML", rendered.innerHTML);
+      }
+      return datum.label === rendered.innerHTML;
+    });
+    console.log("td", td);
+    return td;
+  });
+};
+
 describe("WordCloud", () => {
   afterEach(cleanup);
 

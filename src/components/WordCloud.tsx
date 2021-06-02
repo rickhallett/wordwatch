@@ -63,7 +63,7 @@ export const WordCloud = ({
             />
           );
         }
-        if (popularityOf(topic).isForth) {
+        if (popularityOf(topic).isForth()) {
           return (
             <ForthPopularTopic
               key={topic.id}
@@ -72,7 +72,7 @@ export const WordCloud = ({
             />
           );
         }
-        if (popularityOf(topic).isFifth) {
+        if (popularityOf(topic).isFifth()) {
           return (
             <FifthPopularTopic
               key={topic.id}
