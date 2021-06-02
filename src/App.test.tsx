@@ -25,6 +25,8 @@ import { ApiInterface } from "./util/getTopicData";
 const noop = () => {};
 
 describe("App", () => {
+  afterEach(cleanup);
+
   /**
    * ERROR
    * When testing, code that causes React state updates should be wrapped into act(...):
