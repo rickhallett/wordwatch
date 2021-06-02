@@ -5,6 +5,7 @@ import {
   waitFor,
   cleanup,
 } from "@testing-library/react";
+import { formatDiagnosticsWithColorAndContext } from "typescript";
 import App from "../App";
 import { Topic } from "../types";
 import { popularityOf } from "../util/constants";
@@ -12,6 +13,15 @@ import { ApiInterface } from "../util/getTopicData";
 import { WordCloud } from "./WordCloud";
 
 const noop = () => {};
+
+const checkRendersWithData = (
+  renderedElements: HTMLElement[],
+  topicData: any[]
+): boolean => {
+  return renderedElements.every((rendered) =>
+    topicData.find((datum) => datum.label === rendered.innerHTML)
+  );
+};
 
 describe("WordCloud", () => {
   afterEach(cleanup);
@@ -61,53 +71,46 @@ describe("WordCloud", () => {
    */
   it("Renders most popular topics largest", async () => {
     const data = await ApiInterface.getTopicData();
-    const firstMostPopularTopicData = data.topics.find((t) =>
+    const firstMostPopularTopicData = data.topics.filter((t) =>
       popularityOf(t).isFirst()
     );
-
-    // console.log("firstMostPopularTopicData", firstMostPopularTopicData);
 
     const app = render(<App />);
     const firstTopicsRendered = app.getAllByTestId("topic-element");
 
     // TODO: find a way to do this declaritively with react-testing-library
-    const firstMostPopularTopicRendered = firstTopicsRendered.find(
+    const firstMostPopularTopicsRendered = firstTopicsRendered.filter(
       (el) => el.outerHTML.substring(0, 3) === "<h1"
     );
 
-    // screen.debug(firstMostPopularTopicRendered);
-
-    expect(firstMostPopularTopicRendered?.innerHTML).toEqual(
-      firstMostPopularTopicData?.label
-    );
+    expect(
+      checkRendersWithData(
+        firstMostPopularTopicsRendered,
+        firstMostPopularTopicData
+      )
+    ).toBe(true);
   });
 
   it("Renders second most popular topics second largest", async () => {
     const data = await ApiInterface.getTopicData();
-    const firstSecondMostPopularTopicData = data.topics.find((t) =>
+    const secondMostPopularTopicData = data.topics.filter((t) =>
       popularityOf(t).isSecond()
-    );
-
-    console.log(
-      "firstSecondMostPopularTopicData",
-      firstSecondMostPopularTopicData
     );
 
     const app = render(<App />);
     const secondTopicsRendered = app.getAllByTestId("topic-element");
 
     // TODO: find a way to do this declaritively with react-testing-library
-    const firstSecondMostPopularTopicRendered = secondTopicsRendered.find(
+    const secondMostPopularTopicsRendered = secondTopicsRendered.filter(
       (el) => el.outerHTML.substring(0, 3) === "<h2"
     );
 
-    screen.debug(firstSecondMostPopularTopicRendered);
-
-    // console.log("firstMostPopularTopicRendered", firstMostPopularTopicRendered);
-
-    expect(firstSecondMostPopularTopicRendered?.innerHTML).toEqual(
-      firstSecondMostPopularTopicData?.label
-    );
+    expect(
+      checkRendersWithData(
+        secondMostPopularTopicsRendered,
+        secondMostPopularTopicData
+      )
+    ).toBe(true);
   });
 
   xit("Renders third most popular topics third largest", () => {});
