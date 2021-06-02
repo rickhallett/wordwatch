@@ -27,23 +27,15 @@ const noop = () => {};
 describe("App", () => {
   afterEach(cleanup);
 
-  /**
-   * ERROR
-   * When testing, code that causes React state updates should be wrapped into act(...):
-
-    act(() => {
-      // fire events that effect state
-    });
-    assert on the output
-
-    This ensures that you're testing the behavior the user would see in the browser. Learn more at https://reactjs.org/link/wrap-tests-with-act
-        at App (/Users/kaishin/dev/react/wordwatch/src/App.tsx:17:37)
-
-    SOLUTIONS
-    - is this happening because the rendering of app itself causes state updates, which then trigger another render? If so, could I solve this by passing the initial data as props?
-   */
   it("App does not crash", () => {
     render(<App />);
+  });
+
+  it("Renders the header", () => {
+    render(<Header />);
+
+    const heading = screen.getByText("WordWatch");
+    expect(heading).toHaveTextContent("WordWatch");
   });
 
   it("Renders with initial topic data", () => {
@@ -57,42 +49,16 @@ describe("App", () => {
     const metacloud = wrapper.getByTestId("metacloud");
   });
 
-  describe("Header", () => {
-    xit("Renders the header", () => {
-      // TODO: why does act() not deal with the app state update on render?
-      act(() => {
-        render(<Header />);
-      });
-
-      const heading = screen.getByText("WordWatch");
-      expect(heading).toHaveTextContent("WordWatch");
-    });
-  });
-
   describe("Layout", () => {
-    /** Test Error
-     * 
-     * Invalid hook call. Hooks can only be called inside of the body of a function component. This could happen for one of the following reasons:
-    1. You might have mismatching versions of React and the renderer (such as React DOM)
-    2. You might be breaking the Rules of Hooks
-    3. You might have more than one copy of React in the same app
-        See https://reactjs.org/link/invalid-hook-call for tips about how to debug and fix this problem.
-
-        https://www.andrewsouthpaw.com/fix-invalid/
-
-
-     */
-
-    // TODO: look into snapshot testing to test layout
-
-    xit("Collapses to flex-column after medium breakpoints are surpassed", () => {
-      // act(() => {
-      // render(App());
-      // });
-    });
+    // TODO: look into snapshot testing and/or responsiveness testing to test layout
+    xit("Collapses to flex-column after medium breakpoints are surpassed", () => {});
   });
 
   describe("WordCloud", () => {
+    it("Renders the WordCloud without crashing", () => {
+      render(<WordCloud topics={[]} onWordSelect={noop} />);
+    });
+
     xit("If there are no topics, the user is meaningfully notified", () => {
       const wordCloud = render(<WordCloud topics={[]} onWordSelect={noop} />);
 

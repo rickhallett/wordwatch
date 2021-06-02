@@ -20,18 +20,6 @@ const App = (): JSX.Element => {
     selectRandomTopic(data.topics)
   );
 
-  // const [activeTopic, setActiveTopic] = useState<Topic>();
-  // DEPRECATED: updating state on render was causing problems with testing; probably this means it was not a good solution
-  // useEffect(() => {
-  //   const asyncFetch = async () => {
-  //     const data = await ApiInterface.getTopicData();
-  //     setTopicData(data.topics);
-  //     setActiveTopic(selectRandomTopic(data.topics));
-  //   };
-
-  //   asyncFetch();
-  // }, []);
-
   // TODO: what is the React ts type for a mouse click event? React.MouseEvent does not define event.target.innerText)
   const handleWordClick = (event: any, id: string) => {
     try {
